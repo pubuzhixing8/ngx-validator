@@ -39,6 +39,10 @@ export class NgxFormValidatorService {
         }
     }
 
+    /**
+     * 清除错误提示
+     * @param name 表单元素name属性
+     */
     private _clearElementError(name: string) {
         if (this.validations[name] && this.validations[name].hasError) {
             this.validations[name].hasError = false;
@@ -47,6 +51,10 @@ export class NgxFormValidatorService {
         }
     }
 
+    /**
+     * 尝试获取validations数据
+     * @param name 表单元素的name属性
+     */
     private _tryGetValidation(name: string) {
         if (!this.validations[name]) {
             this._initializeFormControlValidation(name, this._ngForm.controls[name]);
@@ -54,6 +62,11 @@ export class NgxFormValidatorService {
         return this.validations[name];
     }
 
+    /**
+     * 初始化表单元素的validations的数据项目，并且绑定control的change事件，当value发生改变时能够清除错误提示
+     * @param name 表单元素name属性
+     * @param control Abstract 抽象的，ngForm维护的表单元素实例
+     */
     private _initializeFormControlValidation(name: string, control: AbstractControl) {
         this.validations[name] = {
             hasError: false,
@@ -120,6 +133,10 @@ export class NgxFormValidatorService {
         this._config = config;
     }
 
+    /**
+     * 验证表单元素，逻辑中并未由验证，其实验证是由ngForm处理的，这里只是拿到验证的结果做进一步处理
+     * @param name 表单元素的name属性
+     */
     validateControl(name: string) {
         this._clearElementError(name);
         const control = this._ngForm.controls[name];
@@ -149,8 +166,8 @@ export class NgxFormValidatorService {
     }
 
     validate($event?: Event): boolean {
-        this._ngForm.onSubmit($event);
-        this.validateControls();
+        this._ngForm.onSubmit($event); // 执行真正的验证
+        this.validateControls(); // 又有什么用处
         return this._ngForm.valid;
     }
 

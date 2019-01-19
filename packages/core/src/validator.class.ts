@@ -4,7 +4,11 @@ import { IValidationFeedbackStrategy } from './strategies';
 export interface Dictionary<T> {
     [key: string]: T;
 }
-
+/**
+ * 定义验证提示数据结构 key,value键值对
+ * Dictionary<T> 是基础的key,value键值对
+ * Dictionary<Dictionary<string>> 两层的key,value键值对，第一层是表单字段对应验证（一个字段可能从多个维度验证，非空、正则格式等），第二层是每个验证维度和对应的提示
+ */
 export declare type NgxValidationMessages = Dictionary<Dictionary<string>>;
 
 export interface NgxValidatorConfig {

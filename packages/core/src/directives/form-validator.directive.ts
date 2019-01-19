@@ -44,9 +44,9 @@ export class NgxFormValidatorDirective implements OnInit, OnDestroy {
     constructor(
         private ngZone: NgZone,
         private renderer: Renderer2,
-        private elementRef: ElementRef,
+        private elementRef: ElementRef, // 应该是指当前form元素
         private _validator: NgxFormValidatorService,
-        private ngForm: NgForm
+        private ngForm: NgForm // 应是封装了表单处理的一些逻辑
     ) {}
 
     ngOnInit() {
