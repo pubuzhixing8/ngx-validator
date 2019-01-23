@@ -15,10 +15,16 @@ const INVALID_FEEDBACK_CLASS = 'invalid-feedback';
 const CUSTOM_INVALID_CLASS = 'custom-invalid';
 const CUSTOM_INVALID_FEEDBACK_CLASS = 'custom-invalid-feedback';
 
+/**
+ * describe由jasmine提供 用于测试结果的分组
+ */
 describe('ngxFormValidator', () => {
     describe('Template Driven', () => {
-        let fixture: ComponentFixture<SimpleTemplateDrivenDemoComponent>;
+        let fixture: ComponentFixture<SimpleTemplateDrivenDemoComponent>; // ComponentFixture对组件的封装，相当于一个高阶组件，提供对组件的访问
 
+        /**
+         * 由jasmine提供，定义当前describe下每个case都要执行的代码
+         */
         beforeEach(() => {
             TestBed.configureTestingModule({
                 declarations: [SimpleTemplateDrivenDemoComponent],
@@ -43,6 +49,9 @@ describe('ngxFormValidator', () => {
             const emailInputElement = fixture.nativeElement.querySelector('#email1');
             const feedbackElement = fixture.nativeElement.querySelector(`.${INVALID_FEEDBACK_CLASS}`);
             expect(emailInputElement.classList.contains(INVALID_CLASS)).toBe(true);
+            /**
+             * toBeTruthy Trythy对应验证真值,既：除了false,0,"",null,undefined,NaN（falsy）除外的值
+             */
             expect(feedbackElement).toBeTruthy();
             expect(feedbackElement.textContent).toContain(emailErrorMessage);
 
@@ -74,10 +83,10 @@ describe('ngxFormValidator', () => {
             fixture.detectChanges();
             expect(fixture.componentInstance.ngxFormValidator.validator.validatorConfig).toEqual(inputConfig);
         });
-
-        it('should show required error feedback when submit with empty email value', fakeAsync(() => {
+        // fakeAsync 伪造异步
+        it('should show required error feedback when submit with empty email value', fakeAsync(() => {//异步包裹，代码使用tick就需要包裹
             fixture.detectChanges();
-            tick();
+            tick();//模拟ng-zone单击事件的演示
             // const ngxFormValidator = fixture.debugElement.children[0].injector.get(NgxFormValidatorDirective);
             // const ngxFormValidator = fixture.debugElement.query(By.directive(NgxFormValidatorDirective));
             submitFormAndAssertEmailFeedbackError(DEFAULT_GLOBAL_VALIDATION_MESSAGES.required);
