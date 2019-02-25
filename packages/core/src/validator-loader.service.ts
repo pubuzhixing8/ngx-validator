@@ -13,7 +13,9 @@ const defaultValidatorConfig: NgxValidatorGlobalConfig = {
     validationFeedbackStrategy: ValidationFeedbackStrategyBuilder.bootstrap(),
     validationMessages: {}
 };
-
+/**
+ * 根据配置的反馈策略，获取配置的验证错误消息
+ */
 @Injectable({
     providedIn: 'root'
 })

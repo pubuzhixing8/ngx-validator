@@ -14,7 +14,7 @@ export class NgxFormValidatorService {
 
     // public errors: string[];
 
-    // 记录所有元素的验证信息
+    // 记录所有元素的验证信息，key：对应表单元素name，value值类型：{hasError?: boolean;errorMessages?: string[];}，每个表单可能有多项验证
     public validations: Dictionary<{
         hasError?: boolean;
         errorMessages?: string[];
@@ -165,9 +165,13 @@ export class NgxFormValidatorService {
         });
     }
 
+    /**
+     * 外部调用执行验证（点击submit、按Enter键等）
+     * @param $event 触发事件对象
+     */
     validate($event?: Event): boolean {
         this._ngForm.onSubmit($event); // 执行真正的验证
-        this.validateControls(); // 又有什么用处
+        this.validateControls(); // 根据验证结果 控制feedback的显示
         return this._ngForm.valid;
     }
 

@@ -1,6 +1,8 @@
 import { Directive, forwardRef, Attribute, Injectable, ElementRef, Input } from '@angular/core';
 import { NG_VALIDATORS, Validator, AbstractControl, FormControl, Validators, ValidatorFn } from '@angular/forms';
-
+/**
+ * 最小值指令 封装了验证对象Validator
+ */
 @Directive({
     selector: 'input[type=number][ngxMin][formControlName],input[type=number][ngxMin][formControl],input[type=number][ngxMin][ngModel],',
     providers: [
